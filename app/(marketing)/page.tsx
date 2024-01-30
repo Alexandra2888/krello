@@ -43,7 +43,7 @@ const MarketingPage = () => {
         </div>
       </div>
       <div className={cn("text-sm md:text-xl text-neutral-400 mt-4 max-w-xs md:max-w-2xl text-center mx-auto", textFont.className)}>
-        Collaborate, manage projects, and areach new productivity peaks.from
+        Collaborate, manage projects, and areach new productivity peaks. From
         high rise to the home office, the way your team works is unique -
         accomplish it all with Taskify.{" "}
       </div>
