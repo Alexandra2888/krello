@@ -12,6 +12,7 @@ export const Navbar = () => {
         <div className="hidden md:flex">
           <Logo />
         </div>
+        
           <Button size="sm" variant="primary" className="rounded-sm hidden md:block h-auto py-1.5 px-2">
             Create
           </Button>
