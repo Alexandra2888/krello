@@ -5,17 +5,17 @@ import { FormInput } from "@/components/form/form-input";
 import { FormSubmit } from "@/components/form/form-submit";
 import { useAction } from "@/hooks/use-action";
 import { List } from "@prisma/client";
-import { error } from "console";
 import { useState, useRef, ElementRef } from "react";
 import { toast } from "sonner";
 import { useEventListener } from "usehooks-ts";
 import { ListOptions } from "./list-options";
 
 interface ListHeaderProps {
-    data:List
+    data: List,
+    onAddCard: () => void
 }
 
-export const ListHeader = ({ data }: ListHeaderProps) => {
+export const ListHeader = ({ data, onAddCard }: ListHeaderProps) => {
     const [title, setTitle] = useState(data.title);
     const [isEditing, setIsEditing] = useState(false);
     const formRef = useRef<ElementRef<"form">>(null);
@@ -62,9 +62,7 @@ export const ListHeader = ({ data }: ListHeaderProps) => {
         }
     };
     useEventListener('keydown', onKeyDown);
-
-    const onAddCard = () => {}
-
+    
     return (
         <div className="pt-2 px-2 text-sm font-semibold flex justify-between items-start gap-x-2">
             {isEditing ? (
@@ -80,7 +78,7 @@ export const ListHeader = ({ data }: ListHeaderProps) => {
                 {title}
             </div>   
             )}
-            <ListOptions onAddCard={() => {}} data={data} />
+            <ListOptions onAddCard={onAddCard} data={data} />
         </div>
     )
 }
