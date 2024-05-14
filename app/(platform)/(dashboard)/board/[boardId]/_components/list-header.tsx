@@ -9,6 +9,7 @@ import { error } from "console";
 import { useState, useRef, ElementRef } from "react";
 import { toast } from "sonner";
 import { useEventListener } from "usehooks-ts";
+import { ListOptions } from "./list-options";
 
 interface ListHeaderProps {
     data:List
@@ -62,6 +63,8 @@ export const ListHeader = ({ data }: ListHeaderProps) => {
     };
     useEventListener('keydown', onKeyDown);
 
+    const onAddCard = () => {}
+
     return (
         <div className="pt-2 px-2 text-sm font-semibold flex justify-between items-start gap-x-2">
             {isEditing ? (
@@ -74,10 +77,10 @@ export const ListHeader = ({ data }: ListHeaderProps) => {
                 </form>
             ) : (
                 <div onClick={enableEditing} className="w-full text-sm px-2.5 py-1 h-7 font-medium border-transparent">
-                {data.title}
+                {title}
             </div>   
             )}
-           
+            <ListOptions onAddCard={() => {}} data={data} />
         </div>
     )
 }
