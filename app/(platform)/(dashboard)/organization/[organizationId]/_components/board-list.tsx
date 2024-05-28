@@ -1,11 +1,11 @@
 import { FormPopover } from "@/components/form/form-popover"
-import { Hint } from "@/components/hint"
-import { HelpCircle, User2 } from "lucide-react"
+import {  User2 } from "lucide-react"
 import { db } from "@/lib/db"
 import { auth } from "@clerk/nextjs"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 import { Skeleton } from "@/components/ui/skeleton"
+
 
 export const BoardList = async () => {
     const { orgId } = auth();
@@ -20,6 +20,8 @@ export const BoardList = async () => {
             createdAt: "desc"
         }
     });
+
+    
     return (
         <div className="space-y-4">
             <div className="flex items-center font-semibold text-lg text-neutral-700">
@@ -41,15 +43,6 @@ export const BoardList = async () => {
                 <FormPopover sideOffset={10} side="right">
                 <div role="button" className="aspect-video relative w-full h-full bg-muted rounded-sm flex flex-col gap-y-1 items-center justify-center hover:opacity-75 transition">
                     <p className="text0sm">Create new board</p>
-                    <span className="text-sm">5 remaining</span>
-                    <Hint
-                        sideOffset={40}
-                        description={`
-                            Free Workspaces can have up to 5 open boards. For unlimited boards upgrade this workspace.
-                        `}
-                    >
-                        <HelpCircle className="absolute bottom-2 right-2 h-[14px] w-[14px]"/>
-                    </Hint>
                     </div>
                     </FormPopover>
             </div>

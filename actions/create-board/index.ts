@@ -17,6 +17,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
             error: "Unauthorized",
         };
     }
+
     const { title, image } = data;
 
     const [imageId, imageThumbUrl, imageFullUrl, imageLinkHTML, imageUserName] = image.split("|");
@@ -40,6 +41,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
                 imageLinkHTML
             }
         });
+
 
         await createAuditLog({
             entityTitle: board.title,

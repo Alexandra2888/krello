@@ -16,7 +16,7 @@ export const ModalProvider = () => {
     
     return (
         <>
-        <CardModal/>
+            <CardModal />
         </>
     )
 }

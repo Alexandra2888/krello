@@ -25,37 +25,37 @@ model Board {
 
   lists List[]
 
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model List {
-  id            String @id @default(uuid()) @map("_id")
-  title         String
-  order         Int
+  id    String @id @default(uuid()) @map("_id")
+  title String
+  order Int
 
-  boardId       String
-  board         Board  @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  boardId String
+  board   Board  @relation(fields: [boardId], references: [id], onDelete: Cascade)
 
-  cards         Card[]
+  cards Card[]
 
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([boardId])
 }
 
 model Card {
-  id            String @id @default(uuid()) @map("_id")
-  title         String
-  order         Int
-  description   String? @db.String
+  id          String  @id @default(uuid()) @map("_id")
+  title       String
+  order       Int
+  description String? @db.String
 
-  listId        String
-  list          List @relation(fields: [listId], references: [id], onDelete: Cascade)
+  listId String
+  list   List   @relation(fields: [listId], references: [id], onDelete: Cascade)
 
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([listId])
 }
@@ -73,16 +73,17 @@ enum ENTITY_TYPE {
 }
 
 model AuditLog {
-  id            String @id @default(uuid()) @map("_id")
-  orgId         String
-  action        ACTION
-  entityId      String
-  entityType    ENTITY_TYPE
-  entityTitle   String
-  userId        String
-  userImage     String @db.String
-  userName      String @db.String
+  id          String      @id @default(uuid()) @map("_id")
+  orgId       String
+  action      ACTION
+  entityId    String
+  entityType  ENTITY_TYPE
+  entityTitle String
+  userId      String
+  userImage   String      @db.String
+  userName    String      @db.String
 
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
+
