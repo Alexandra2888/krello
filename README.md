@@ -1,45 +1,48 @@
+# Krello
 
-## Krello
 Krello is a Trello clone built with modern web technologies. It aims to provide a similar task management experience with added features and customization options.
 
-
 ## Table of Contents
-Features
-Installation
-Usage
-Scripts
-Dependencies
-Development
 
-### Features
-Drag-and-drop functionality for task management.
-User authentication and management.
-Responsive and modern UI.
-Integration with various third-party services.
-Real-time updates and notifications.
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Scripts](#scripts)
+- [Dependencies](#dependencies)
+- [Development](#development)
+- [Contributing](#contributing)
+- [License](#license)
 
-### Installation
+## Features
+
+- Drag-and-drop functionality for task management.
+- User authentication and management.
+- Responsive and modern UI.
+- Integration with various third-party services.
+- Real-time updates and notifications.
+
+![Krello Board](path_to_board_image)
+
+## Installation
+
 To get started with Krello, clone the repository and install the dependencies:
 
-
-Copy code
-''' git clone https://github.com/yourusername/krello.git
+```bash
+git clone https://github.com/yourusername/krello.git
 cd krello
-npm install ```
-
+npm install
 Usage
 Run the development server:
 
-```
+bash
 Copy code
-npm run dev ```
+npm run dev
 Build the project for production:
 
-```
+bash
 Copy code
 npm run build
-npm start```
-
+npm start
 Scripts
 Here are the scripts available in this project:
 
