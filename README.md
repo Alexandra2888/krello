@@ -9,9 +9,7 @@ Krello is a Trello clone built with modern web technologies. It aims to provide 
 - [Usage](#usage)
 - [Scripts](#scripts)
 - [Dependencies](#dependencies)
-- [Development](#development)
-- [Contributing](#contributing)
-- [License](#license)
+- [Preview](#preview)
 
 ## Features
 
@@ -79,6 +77,7 @@ unsplash-js: ^7.0.19
 usehooks-ts: ^2.15.1
 zod: ^3.23.6
 zustand: ^4.5.1
+```
 
 ### Preview
 
