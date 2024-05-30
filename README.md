@@ -21,7 +21,6 @@ Krello is a Trello clone built with modern web technologies. It aims to provide 
 - Integration with various third-party services.
 - Real-time updates and notifications.
 
-![Krello Board](path_to_board_image)
 
 ## Installation
 
