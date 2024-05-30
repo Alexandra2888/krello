@@ -21,23 +21,25 @@ Real-time updates and notifications.
 ### Installation
 To get started with Krello, clone the repository and install the dependencies:
 
-bash
+
 Copy code
-git clone https://github.com/yourusername/krello.git
+'''git clone https://github.com/yourusername/krello.git
 cd krello
-npm install
+npm install```
+
 Usage
 Run the development server:
 
-bash
+```
 Copy code
-npm run dev
+npm run dev ```
 Build the project for production:
 
-bash
+```
 Copy code
 npm run build
-npm start
+npm start```
+
 Scripts
 Here are the scripts available in this project:
 
