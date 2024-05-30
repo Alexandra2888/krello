@@ -23,9 +23,9 @@ To get started with Krello, clone the repository and install the dependencies:
 
 
 Copy code
-'''git clone https://github.com/yourusername/krello.git
+''' git clone https://github.com/yourusername/krello.git
 cd krello
-npm install```
+npm install ```
 
 Usage
 Run the development server:
