@@ -36,7 +36,7 @@ const MarketingPage = () => {
           No 1 task amanagement
         </div>
         <h1 className="text-3xl md:text-6xl text-center text-neutral-800 mb-6">
-          Krello helps team move
+          Krello helps team
         </h1>
         <div className="text-3xl md:text-6xl bg-gradient-to-r from-purple-700 via-pink-500 to-pink-500 text-white px-4 p-2 rounded-md pb-4 w-fit">
           move forward.
