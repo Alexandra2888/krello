@@ -17,10 +17,11 @@ interface FormTextareaProps {
     className?: string;
     onBlur?: () => void;
     onClick?: () => void;
-    onKeyDown?: KeyboardEventHandler<HTMLAreaElement> | undefined;
+    onKeyDown?: KeyboardEventHandler<HTMLTextAreaElement> | undefined; 
     defaultValue?: string;
 };
 
+ 
 export const FormTextarea = forwardRef<HTMLTextAreaElement, FormTextareaProps>(({
     id, label, placeholder, required, disabled, errors, className, onBlur, onClick, onKeyDown, defaultValue
 }, ref) => {
@@ -32,7 +33,7 @@ export const FormTextarea = forwardRef<HTMLTextAreaElement, FormTextareaProps>((
                     <Label htmlFor={id} className="text-sm font-semibold text-neutral-700">
                         {label}
                     </Label>) : null}
-                <Textarea
+                 <Textarea
                     onKeyDown={onKeyDown}
                     onBlur={onBlur}
                     onClick={onClick}
