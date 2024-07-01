@@ -10,7 +10,7 @@ Krello is a Trello clone built with modern web technologies. It aims to provide 
 - [Scripts](#scripts)
 - [Dependencies](#dependencies)
 - [Preview](#preview)
-
+- [Live](#live)
 ## Features
 
 - Drag-and-drop functionality for task management.
@@ -86,5 +86,8 @@ zustand: ^4.5.1
 ![image](https://github.com/Alexandra2888/krello/assets/76844097/d376ec4d-7468-41a8-af6a-9d91c820ff7d)
 
 ![image](https://github.com/Alexandra2888/krello/assets/76844097/d02073c3-76aa-4cd2-bac1-474fcb27795b)
+
+### Live
+https://krello-beta.vercel.app/
 
 
