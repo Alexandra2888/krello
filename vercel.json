@@ -1,0 +1,9 @@
+{
+    "build": {
+      "env": {
+        "DATABASE_URL": "@your_database_url"
+      }
+    },
+    "buildCommand": "npm run build && prisma generate"
+  }
+  
