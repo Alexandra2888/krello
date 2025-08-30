@@ -7,10 +7,16 @@ export async function GET(
     { params }: { params: { cardId: string } }
 ) {
     try {
+        // Validate cardId parameter
+        if (!params.cardId || params.cardId === "undefined") {
+            return new NextResponse("Invalid card ID", { status: 400 });
+        }
+
         const { userId, orgId } = auth();
         if (!userId || !orgId) {
             return new NextResponse("Unauthorized", { status: 401 });
         }
+
         const card = await db.card.findUnique({
             where: {
                 id: params.cardId,
@@ -28,8 +34,14 @@ export async function GET(
                 }
             }
         });
+
+        if (!card) {
+            return new NextResponse("Card not found", { status: 404 });
+        }
+
         return NextResponse.json(card);
     } catch (error) {
-        return new NextResponse("Internal error", {status: 500})
+        console.error("Card API Error:", error);
+        return new NextResponse("Internal error", { status: 500 });
     }
 }

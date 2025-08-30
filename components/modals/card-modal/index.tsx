@@ -16,15 +16,25 @@ export const CardModal = () => {
   const isOpen = useCardModal((state) => state.isOpen);
   const onClose = useCardModal((state) => state.onClose);
 
-  const { data: cardData } = useQuery<CardWithList>({
+  const { data: cardData, error: cardError } = useQuery<CardWithList>({
     queryKey: ["card", id],
     queryFn: () => fetcher(`/api/cards/${id}`),
+    enabled: !!id && id !== "undefined",
+    retry: 1,
   });
 
-  const { data: auditLogsData } = useQuery<AuditLog[]>({
+  const { data: auditLogsData, error: logsError } = useQuery<AuditLog[]>({
     queryKey: ["card-logs", id],
     queryFn: () => fetcher(`/api/cards/${id}/logs`),
+    enabled: !!id && id !== "undefined",
+    retry: 1,
   });
+
+  // Don't render if no valid ID
+  if (!id || id === "undefined") {
+    return null;
+  }
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
