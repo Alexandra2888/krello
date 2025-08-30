@@ -5,8 +5,5 @@
       "maxDuration": 30
     }
   },
-  "env": {
-    "DATABASE_URL": "@database_url"
-  },
   "regions": ["fra1"]
 }
