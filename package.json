@@ -28,7 +28,7 @@
     "lodash": "^4.17.21",
     "lucide-react": "^0.317.0",
     "mongodb": "^6.6.1",
-    "next": "^14.2.25",
+    "next": "14.2.35",
     "react": "^18",
     "react-dom": "^18",
     "sonner": "^1.4.41",
