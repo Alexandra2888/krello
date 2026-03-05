@@ -4,8 +4,15 @@ import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
-export const ActivityList = async () => {
-  const { orgId } = auth();
+interface ActivityListProps {
+  orgId: string;
+}
+
+export const ActivityList = async ({
+  orgId: paramOrgId,
+}: ActivityListProps) => {
+  const { orgId: authOrgId } = auth();
+  const orgId = authOrgId || paramOrgId;
 
   if (!orgId) {
     redirect("/select-org");

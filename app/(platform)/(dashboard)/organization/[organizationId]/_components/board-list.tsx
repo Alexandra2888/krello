@@ -6,11 +6,18 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export const BoardList = async () => {
-  const { orgId } = auth();
+interface BoardListProps {
+  orgId: string;
+}
+
+export const BoardList = async ({ orgId: paramOrgId }: BoardListProps) => {
+  const { orgId: authOrgId } = auth();
+  const orgId = authOrgId || paramOrgId;
+
   if (!orgId) {
     return redirect("/select-org");
   }
+
   const boards = await db.board.findMany({
     where: {
       orgId,
@@ -50,6 +57,7 @@ export const BoardList = async () => {
     </div>
   );
 };
+
 BoardList.Skeleton = function SkeletonBoardList() {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
