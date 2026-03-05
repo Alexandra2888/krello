@@ -12,7 +12,7 @@ export async function GET(
       return new NextResponse("Invalid card ID", { status: 400 });
     }
 
-    const { userId, orgId } = auth();
+    const { userId, orgId } = await auth();
     if (!userId || !orgId) {
       return new NextResponse("Unauthorized", { status: 401 });
     }

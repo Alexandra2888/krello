@@ -11,7 +11,7 @@ interface ActivityListProps {
 export const ActivityList = async ({
   orgId: paramOrgId,
 }: ActivityListProps) => {
-  const { orgId: authOrgId } = auth();
+  const { orgId: authOrgId } = await auth();
   const orgId = authOrgId || paramOrgId;
 
   if (!orgId) {

@@ -9,7 +9,7 @@ export async function generateMetadata({
 }: {
   params: { boardId: string };
 }) {
-  const { orgId } = auth();
+  const { orgId } = await auth();
   if (!orgId) {
     return {
       title: "Board",
@@ -34,7 +34,7 @@ const BoardIdLayout = async ({
   children: React.ReactNode;
   params: { boardId: string };
 }) => {
-  const { orgId } = auth();
+  const { orgId } = await auth();
   if (!orgId) {
     redirect("/select-org");
   }

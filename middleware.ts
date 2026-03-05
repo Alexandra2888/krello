@@ -9,11 +9,9 @@ const isPublicRoute = createRouteMatcher([
   "/select-org(.*)",
 ]);
 
-const isOrgRoute = createRouteMatcher(["/organization/(.*)"]);
-
 export default clerkMiddleware(
-  (auth, req) => {
-    const { userId, orgId, redirectToSignIn } = auth();
+  async (auth, req) => {
+    const { userId, orgId, redirectToSignIn } = await auth();
 
     if (userId && req.nextUrl.pathname === "/") {
       const path = orgId ? `/organization/${orgId}` : "/select-org";
@@ -24,11 +22,18 @@ export default clerkMiddleware(
       return redirectToSignIn({ returnBackUrl: req.url });
     }
 
-    if (userId && !orgId && !isPublicRoute(req) && !isOrgRoute(req)) {
+    if (userId && !orgId && !isPublicRoute(req)) {
       return NextResponse.redirect(new URL("/select-org", req.url));
     }
   },
-  { debug: process.env.NODE_ENV === "development" },
+  {
+    organizationSyncOptions: {
+      organizationPatterns: [
+        "/organization/:id",
+        "/organization/:id/(.*)",
+      ],
+    },
+  },
 );
 
 export const config = {

@@ -10,7 +10,7 @@ interface BoardIdProps {
 }
 
 const BoardIdPage = async ({ params }: BoardIdProps) => {
-  const { orgId } = auth();
+  const { orgId } = await auth();
   if (!orgId) {
     redirect("/select-org");
   }

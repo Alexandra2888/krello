@@ -11,7 +11,7 @@ interface Props {
 
 export const createAuditLog = async (props: Props) => {
   try {
-    const { orgId } = auth();
+    const { orgId } = await auth();
     const user = await currentUser();
 
     if (!user || !orgId) {

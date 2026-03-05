@@ -11,7 +11,7 @@ interface BoardListProps {
 }
 
 export const BoardList = async ({ orgId: paramOrgId }: BoardListProps) => {
-  const { orgId: authOrgId } = auth();
+  const { orgId: authOrgId } = await auth();
   const orgId = authOrgId || paramOrgId;
 
   if (!orgId) {
