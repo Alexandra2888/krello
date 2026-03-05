@@ -9,22 +9,25 @@ const isPublicRoute = createRouteMatcher([
   "/select-org(.*)",
 ]);
 
-export default clerkMiddleware((auth, req) => {
-  const { userId, orgId, redirectToSignIn } = auth();
+export default clerkMiddleware(
+  (auth, req) => {
+    const { userId, orgId, redirectToSignIn } = auth();
 
-  if (userId && req.nextUrl.pathname === "/") {
-    const path = orgId ? `/organization/${orgId}` : "/select-org";
-    return NextResponse.redirect(new URL(path, req.url));
-  }
+    if (userId && req.nextUrl.pathname === "/") {
+      const path = orgId ? `/organization/${orgId}` : "/select-org";
+      return NextResponse.redirect(new URL(path, req.url));
+    }
 
-  if (!userId && !isPublicRoute(req)) {
-    return redirectToSignIn({ returnBackUrl: req.url });
-  }
+    if (!userId && !isPublicRoute(req)) {
+      return redirectToSignIn({ returnBackUrl: req.url });
+    }
 
-  if (userId && !orgId && !isPublicRoute(req)) {
-    return NextResponse.redirect(new URL("/select-org", req.url));
-  }
-});
+    if (userId && !orgId && !isPublicRoute(req)) {
+      return NextResponse.redirect(new URL("/select-org", req.url));
+    }
+  },
+  { debug: process.env.NODE_ENV === "development" },
+);
 
 export const config = {
   matcher: [
