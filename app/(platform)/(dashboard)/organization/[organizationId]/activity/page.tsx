@@ -3,6 +3,8 @@ import { Info } from "../_components/info";
 import { Suspense } from "react";
 import { ActivityList } from "./_components/activity-list";
 
+export const maxDuration = 60;
+
 interface ActivityPageProps {
   params: {
     organizationId: string;

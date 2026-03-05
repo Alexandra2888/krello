@@ -4,6 +4,8 @@ import { notFound, redirect } from "next/navigation";
 
 import { BoardNavbar } from "./_components/board-navbar";
 
+export const maxDuration = 60;
+
 export async function generateMetadata({
   params,
 }: {

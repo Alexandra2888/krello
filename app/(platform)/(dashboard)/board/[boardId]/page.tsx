@@ -3,6 +3,8 @@ import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 import { ListContainer } from "./_components/list-container";
 
+export const maxDuration = 60;
+
 interface BoardIdProps {
   params: {
     boardId: string;

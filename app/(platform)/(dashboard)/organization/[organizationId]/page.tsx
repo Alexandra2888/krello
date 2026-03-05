@@ -3,6 +3,8 @@ import { Info } from "./_components/info";
 import { BoardList } from "./_components/board-list";
 import { Suspense } from "react";
 
+export const maxDuration = 60;
+
 interface OrganizationPageProps {
   params: {
     organizationId: string;

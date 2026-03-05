@@ -3,6 +3,8 @@ import { auth } from "@clerk/nextjs/server";
 import { ENTITY_TYPE } from "@prisma/client";
 import { NextResponse } from "next/server";
 
+export const maxDuration = 60;
+
 export async function GET(
   request: Request,
   { params }: { params: { cardId: string } },
