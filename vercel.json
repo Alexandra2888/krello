@@ -1,7 +1,7 @@
 {
   "buildCommand": "npm run build && prisma generate",
   "functions": {
-    "app/api/**/*.ts": {
+    "app/**/*.ts": {
       "maxDuration": 30
     }
   },

@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import { auth } from "@clerk/nextjs";
 import { revalidatePath } from "next/cache";
@@ -7,47 +7,48 @@ import { db } from "@/lib/db";
 import { createSafeAction } from "@/lib/create-safe-action";
 
 import { UpdateCardOrder } from "./schema";
-import { InputType, ReturnType } from "./types"
+import { InputType, ReturnType } from "./types";
 
 const handler = async (data: InputType): Promise<ReturnType> => {
-    const { userId, orgId } = auth();
+  const { userId, orgId } = auth();
 
-    if (!userId || !orgId) {
-        return {
-            error: "Not authorized",
-        };
-    }
+  if (!userId || !orgId) {
+    return {
+      error: "Not authorized",
+    };
+  }
 
-    const { items, boardId } = data
-    let updatedCards;
+  const { items, boardId } = data;
+  let updatedCards;
 
-    try {
-        const transaction = items.map((card) =>
-            db.card.update({
-                where: {
-                    id: card.id,
-                    list: {
-                        board: {
-                            orgId,
-                        },
-                    },
-                },
-                data: {
-                    order: card.order,
-                    listId: card.listId,
-                },
-            }),
-        );
+  try {
+    const transaction = items.map((card) =>
+      db.card.update({
+        where: {
+          id: card.id,
+          list: {
+            board: {
+              orgId,
+            },
+          },
+        },
+        data: {
+          order: card.order,
+          listId: card.listId,
+        },
+      }),
+    );
 
-        updatedCards = await db.$transaction(transaction)
-    } catch (error) {
-        return {
-            error: "Failed to reorder"
-        }
-    }
+    updatedCards = await db.$transaction(transaction);
+  } catch (error) {
+    console.error("[UPDATE_CARD_ORDER]", error);
+    return {
+      error: "Failed to reorder",
+    };
+  }
 
-    revalidatePath(`/board/${boardId}`);
-    return { data: updatedCards };
+  revalidatePath(`/board/${boardId}`);
+  return { data: updatedCards };
 };
 
-export const updateCardOrder = createSafeAction(UpdateCardOrder, handler)
+export const updateCardOrder = createSafeAction(UpdateCardOrder, handler);
