@@ -26,7 +26,12 @@ export default clerkMiddleware(
       return NextResponse.redirect(new URL("/select-org", req.url));
     }
   },
-  { debug: process.env.NODE_ENV === "development" },
+  {
+    organizationSyncOptions: {
+      organizationPatterns: ["/organization/:id", "/organization/:id/(.*)"],
+    },
+    debug: process.env.NODE_ENV === "development",
+  },
 );
 
 export const config = {
