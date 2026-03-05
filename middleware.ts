@@ -1,44 +1,27 @@
-import { authMiddleware } from "@clerk/nextjs";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { redirectToSignIn } from "@clerk/nextjs";
- 
-// This example protects all routes including api/trpc routes
-// Please edit this to allow other routes to be public as needed.
-// See https://clerk.com/docs/references/nextjs/auth-middleware for more information about configuring your Middleware
-export default authMiddleware({
-  publicRoutes: ["/", "/api/webhook"],
-  afterAuth(auth: any, req: any) {
-    if (auth.userId && auth.isPublicRoute) {
-      let path = "/select-org";
 
-      if (auth.orgId) {
-        path = `/organization/${auth.orgId}`;
-      }
+const isPublicRoute = createRouteMatcher(["/", "/api/webhook"]);
 
-      const orgSelection = new URL(path, req.url);
-      return NextResponse.redirect(orgSelection);
-    }
+export default clerkMiddleware((auth, req) => {
+  const { userId, orgId, redirectToSignIn } = auth();
 
-    if (!auth.userId && !auth.isPublicRoute) {
-      return redirectToSignIn({ returnBackUrl: req.url });
-    }
+  if (userId && isPublicRoute(req)) {
+    const path = orgId ? `/organization/${orgId}` : "/select-org";
+    return NextResponse.redirect(new URL(path, req.url));
+  }
 
-    if (auth.userId && !auth.orgId && req.nextUrl.pathname !== "/select-org") {
-      const orgSelection = new URL("/select-org", req.url);
-      return NextResponse.redirect(orgSelection);
-    }
+  if (!userId && !isPublicRoute(req)) {
+    return redirectToSignIn({ returnBackUrl: req.url });
+  }
+
+  if (userId && !orgId && req.nextUrl.pathname !== "/select-org") {
+    return NextResponse.redirect(new URL("/select-org", req.url));
   }
 });
- 
+
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - public folder
-     */
     "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };

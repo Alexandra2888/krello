@@ -1,6 +1,6 @@
-"use server"
+"use server";
 
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { InputType, ReturnType } from "./types";
 import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
@@ -10,47 +10,46 @@ import { ACTION, ENTITY_TYPE } from "@prisma/client";
 import { createAuditLog } from "@/lib/create-audit-log";
 
 const handler = async (data: InputType): Promise<ReturnType> => {
-    const { userId, orgId } = auth();
+  const { userId, orgId } = auth();
 
-    if (!userId || !orgId) {
-        return {
-            error: "Unauthorized",
-        };
-    }
+  if (!userId || !orgId) {
+    return {
+      error: "Unauthorized",
+    };
+  }
 
-    const { id, boardId, ...values } = data;
-    let card;
+  const { id, boardId, ...values } = data;
+  let card;
 
-    try {
-       card = await db.card.update({
-            where: {
-                id,
-               list: {
-                   board: {
-                        orgId
-                    }
-                }
-            },
-            data: {
-                ...values,
-            },
-        });
+  try {
+    card = await db.card.update({
+      where: {
+        id,
+        list: {
+          board: {
+            orgId,
+          },
+        },
+      },
+      data: {
+        ...values,
+      },
+    });
 
-        await createAuditLog({
-            entityTitle: card.title,
-            entityId: card.id,
-            entityType: ENTITY_TYPE.CARD,
-            action: ACTION.UPDATE,
-        })
-        
-    } catch (error) {
-        return {
-            error: "Failed to update"
-        }
-    }
+    await createAuditLog({
+      entityTitle: card.title,
+      entityId: card.id,
+      entityType: ENTITY_TYPE.CARD,
+      action: ACTION.UPDATE,
+    });
+  } catch (error) {
+    return {
+      error: "Failed to update",
+    };
+  }
 
-    revalidatePath(`/board/${id}`);
-    return { data: card };
+  revalidatePath(`/board/${id}`);
+  return { data: card };
 };
 
-export const updateCard = createSafeAction(UpdateCard, handler)
+export const updateCard = createSafeAction(UpdateCard, handler);
