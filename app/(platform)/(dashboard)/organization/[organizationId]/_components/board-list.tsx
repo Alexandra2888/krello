@@ -1,7 +1,6 @@
 import { FormPopover } from "@/components/form/form-popover";
 import { User2 } from "lucide-react";
 import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -10,10 +9,7 @@ interface BoardListProps {
   orgId: string;
 }
 
-export const BoardList = async ({ orgId: paramOrgId }: BoardListProps) => {
-  const { orgId: authOrgId } = await auth();
-  const orgId = authOrgId || paramOrgId;
-
+export const BoardList = async ({ orgId }: BoardListProps) => {
   if (!orgId) {
     return redirect("/select-org");
   }

@@ -1,19 +1,13 @@
 import { ActivityItem } from "@/components/activity-item";
 import { Skeleton } from "@/components/ui/skeleton";
 import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 interface ActivityListProps {
   orgId: string;
 }
 
-export const ActivityList = async ({
-  orgId: paramOrgId,
-}: ActivityListProps) => {
-  const { orgId: authOrgId } = await auth();
-  const orgId = authOrgId || paramOrgId;
-
+export const ActivityList = async ({ orgId }: ActivityListProps) => {
   if (!orgId) {
     redirect("/select-org");
   }
