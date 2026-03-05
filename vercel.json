@@ -1,4 +1,3 @@
 {
-  "buildCommand": "prisma generate && npm run build",
-  "regions": ["fra1"]
+  "buildCommand": "prisma generate && npm run build"
 }
