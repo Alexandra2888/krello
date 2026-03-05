@@ -1,3 +1,8 @@
 {
-  "buildCommand": "prisma generate && npm run build"
+  "buildCommand": "prisma generate && npm run build",
+  "functions": {
+    "app/**": {
+      "maxDuration": 60
+    }
+  }
 }
