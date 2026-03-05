@@ -1,9 +1,4 @@
 {
-  "buildCommand": "npm run build && prisma generate",
-  "functions": {
-    "app/**/*.ts": {
-      "maxDuration": 30
-    }
-  },
+  "buildCommand": "prisma generate && npm run build",
   "regions": ["fra1"]
 }
