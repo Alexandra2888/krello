@@ -1,12 +1,18 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-const isPublicRoute = createRouteMatcher(["/", "/api/webhook"]);
+const isPublicRoute = createRouteMatcher([
+  "/",
+  "/api/webhook",
+  "/sign-in(.*)",
+  "/sign-up(.*)",
+  "/select-org(.*)",
+]);
 
 export default clerkMiddleware((auth, req) => {
   const { userId, orgId, redirectToSignIn } = auth();
 
-  if (userId && isPublicRoute(req)) {
+  if (userId && req.nextUrl.pathname === "/") {
     const path = orgId ? `/organization/${orgId}` : "/select-org";
     return NextResponse.redirect(new URL(path, req.url));
   }
@@ -15,7 +21,7 @@ export default clerkMiddleware((auth, req) => {
     return redirectToSignIn({ returnBackUrl: req.url });
   }
 
-  if (userId && !orgId && req.nextUrl.pathname !== "/select-org") {
+  if (userId && !orgId && !isPublicRoute(req)) {
     return NextResponse.redirect(new URL("/select-org", req.url));
   }
 });
